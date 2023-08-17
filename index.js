@@ -4,6 +4,9 @@ const path = require("path");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
+const usersRouter = require("./routes/users");
+const ticketsRouter = require("./routes/tickets");
+
 const PORT = 8080;
 
 // database setup
@@ -17,10 +20,13 @@ let mongoDB = mongoose.connection;
 mongoDB.on("error", console.error.bind(console, "Connection Error:"));
 mongoDB.once("open", () => {
   console.log("Connected to MongoDB...");
+  app.listen(PORT, () => console.log("API lives on " + PORT));
 });
 
 const app = express();
 
 app.use(express.json());
 
-app.listen(PORT, () => console.log("API lives on " + PORT))
+app.use("/users", usersRouter);
+app.use("/tickets", ticketsRouter);
+
