@@ -3,7 +3,7 @@ let userModel = require('./user');
 let User = userModel.User;
 
 // Create a ticket model class
-let ticketModel = mongoose.Schema(
+let ticketModel = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -28,13 +28,11 @@ let ticketModel = mongoose.Schema(
       default: null
     },
     createdBy: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: 'User',
+      type: String,
       required: true
     },
     assignedTo: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: 'User',
+      type: String,
       required: false,
       default: null
     }
@@ -44,4 +42,4 @@ let ticketModel = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Ticket", ticketModel);
+module.exports.Ticket = mongoose.model("Ticket", ticketModel);

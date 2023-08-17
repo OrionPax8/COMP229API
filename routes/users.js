@@ -4,14 +4,12 @@ const router = express.Router();
 const userModel = require('../models/user');
 const User = userModel.User;
 
-/* GET users listing. */
-router.get('/getusers', async (req, res) => {
-  try{
-    const users = await User.find({});
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({message: error.message});
-  }
-});
+const userController = require('../controllers/userController');
+
+// Sends token via json
+router.post('/login', userController.LoginUser);
+
+// Could probably be processed in app (clear cookie)
+router.get('/logout', userController.LogoutUser);
 
 module.exports = router;

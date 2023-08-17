@@ -4,29 +4,24 @@ let User = userModel.User;
 let ticketModel = require('./ticket');
 let ticket = ticketModel.Ticket;
 
-let commentModel = mongoose.Schema(
+let commentModel = new mongoose.Schema(
     {
        TicketRef:{
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Ticket',
+        type: String,
         required: true
        },
-       Author:{
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'User',
-        required: true
+       author:{
+        type: String,
        },
-       CreatedOn: {
+       createdOn: {
         type: Date,
         default: Date.now,
        },
        description: {
         type: String,
-        required: true
        },
        isInternal: {
         type: Boolean,
-        required: true,
         default: false
        },
        userStories: {
@@ -39,4 +34,4 @@ let commentModel = mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model("Comment", commentModel);
+module.exports.Comment = mongoose.model("Comment", commentModel);
