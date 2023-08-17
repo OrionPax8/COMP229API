@@ -8,7 +8,7 @@ require('dotenv').config();
 const usersRouter = require("./routes/users");
 const ticketsRouter = require("./routes/tickets");
 
-const PORT = 8080;
+const PORT = process.env.PORT || 3000;
 
 // database setup
 
