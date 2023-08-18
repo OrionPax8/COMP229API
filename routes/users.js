@@ -12,4 +12,6 @@ router.post('/login', userController.LoginUser);
 // Could probably be processed in app (clear cookie)
 router.get('/logout', userController.LogoutUser);
 
+//router.get('/users', userController.getAllUsers);
+
 module.exports = router;

@@ -28,13 +28,19 @@ let ticketModel = new mongoose.Schema(
       default: null
     },
     createdBy: {
-      type: String,
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'User',
       required: true
     },
     assignedTo: {
-      type: String,
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'User',
       required: false,
       default: null
+    },
+    comments:{
+      type: [],
+      required: false
     }
   },
   {

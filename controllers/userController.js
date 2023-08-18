@@ -1,5 +1,6 @@
 // create a User Model Instance
 const userModel = require('../models/user');
+const { all } = require('../routes/tickets');
 const User = userModel.User;
 
 
@@ -20,7 +21,7 @@ const LoginUser = async (req, res) => {
 
     const token = user.generateAuthToken();
 
-    res.status(200).json({ message: 'Login successful', status: 1, token: token });
+    res.status(200).json({ message: 'Login successful', status: 1, token: token, userId: user._id });
 
   } catch (error) {
     console.error(error);
@@ -40,5 +41,16 @@ const LogoutUser = async (req, res) => {
         });
       } 
 
+const getAllUsers = async (req, res) => {
 
-module.exports = { LoginUser, LogoutUser };
+        try{
+            let allUsers = await User.find({});
+    
+            res.status(200).json({users: allUsers});
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Server error" });
+          }
+    }
+
+module.exports = { LoginUser, LogoutUser, getAllUsers };
